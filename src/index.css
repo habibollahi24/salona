@@ -277,6 +277,6 @@
     @apply border-border outline-ring/50 font-poppins;
   }
   body {
-    @apply bg-background text-foreground scrollbar;
+    @apply bg-background text-foreground;
   }
 }

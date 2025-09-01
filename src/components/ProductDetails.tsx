@@ -36,6 +36,13 @@ export function ProductDetails({ id }: { id: number }) {
           </span>
         </div>
 
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+          Maxime dicta rem ex ad inventore cum explicabo soluta saepe
+          quas. Ad, delectus quaerat? Saepe eaque delectus unde
+          distinctio consequuntur amet possimus!
+        </p>
+
         <p className="text-sm ">SKU: {data.sku}</p>
         <p className="text-sm ">Stock: {data.stock}</p>
         <p className="text-sm ">Category: {data.category}</p>

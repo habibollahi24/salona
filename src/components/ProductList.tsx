@@ -11,12 +11,14 @@ import { getPageNumbers } from '@/lib/utils';
 import { Button } from './ui/button';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import {
-  Drawer,
-  DrawerContent,
+  // Drawer,
+  // DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
 
-import { useMediaQuery } from '@/hooks/useMediaQuery'; // ✅ شاد‌سی‌ان داره
+// import { useMediaQuery } from '@/hooks/useMediaQuery'; // ✅ شاد‌سی‌ان داره
 import {
   BookmarkIcon,
   ChevronRightIcon,
@@ -32,7 +34,7 @@ export default function ProductsList() {
   const { page, setPage } = useQueryParams();
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const isDesktop = useMediaQuery('(min-width: 768px)');
+  // const isDesktop = useMediaQuery('(min-width: 768px)');
 
   if (isLoading) return <p>Loading...</p>;
   if (isError || !data) return <p>Error loading products</p>;
@@ -128,32 +130,23 @@ export default function ProductsList() {
           ))}
         </PaginationContent>
       </Pagination>
-
-      {isDesktop ? (
-        <Sheet
-          open={!!selectedId}
-          onOpenChange={() => setSelectedId(null)}
-        >
-          <SheetContent
-            side="right"
-            className="pb-8 w-[500px] sm:w-[600px] right-5 top-5 bottom-5 rounded-2xl overflow-auto 
+      <Sheet
+        open={!!selectedId}
+        onOpenChange={() => setSelectedId(null)}
+      >
+        <SheetContent
+          side="right"
+          className="pb-8 w-[90%]  md:right-5 md:top-5 md:bottom-5 rounded-2xl overflow-auto 
             [&::-webkit-scrollbar]:[width:10px]
             [&::-webkit-scrollbar-thumb]:bg-gray-200 [&::-webkit-scrollbar-thumb]:rounded-md "
-          >
-            {selectedId && <ProductDetails id={selectedId} />}
-          </SheetContent>
-        </Sheet>
-      ) : (
-        <Drawer
-          open={!!selectedId}
-          onOpenChange={() => setSelectedId(null)}
         >
-          <DrawerContent className="overflow-scroll">
-            <DrawerTitle>dfdsf</DrawerTitle>
-            {selectedId && <ProductDetails id={selectedId} />}
-          </DrawerContent>
-        </Drawer>
-      )}
+          <DrawerHeader className="hidden">
+            <DrawerTitle />
+            <DrawerDescription />
+          </DrawerHeader>
+          {selectedId && <ProductDetails id={selectedId} />}
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }

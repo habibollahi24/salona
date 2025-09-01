@@ -10,9 +10,7 @@ export function ProductDetails({ id }: { id: number }) {
   if (isLoading) {
     return (
       <div className="p-4 space-y-3 ">
-        <Skeleton className="h-64 w-full rounded-lg" />
-        <Skeleton className="h-6 w-1/2" />
-        <Skeleton className="h-4 w-1/3" />
+        <Skeleton className="h-screen w-full rounded-lg" />
       </div>
     );
   }
@@ -21,7 +19,7 @@ export function ProductDetails({ id }: { id: number }) {
     return <p className="p-4">Error loading product</p>;
 
   return (
-    <div className="p-4 space-y-4  ">
+    <div className="p-4 space-y-4 overflow-x-hidden ">
       <ProductGallery product={data} />
       <div>
         <h1 className="text-3xl font-extralight mb-2">
@@ -35,13 +33,6 @@ export function ProductDetails({ id }: { id: number }) {
             {data.discountPercentage}% OFF
           </span>
         </div>
-
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          Maxime dicta rem ex ad inventore cum explicabo soluta saepe
-          quas. Ad, delectus quaerat? Saepe eaque delectus unde
-          distinctio consequuntur amet possimus!
-        </p>
 
         <p className="text-sm ">SKU: {data.sku}</p>
         <p className="text-sm ">Stock: {data.stock}</p>
@@ -74,22 +65,8 @@ export function ProductDetails({ id }: { id: number }) {
           </p>
         </div>
 
-        {/* 🏷️ تگ‌ها - marquee */}
-        {/* <div className="col-span-2 overflow-hidden whitespace-nowrap border rounded-xl bg-gray-100 my-6">
-          <div className="inline-block animate-marquee py-3">
-            {data.tags.map((tag, idx) => (
-              <span
-                key={idx}
-                className="mx-6 text-gray-700 font-medium inline-block"
-              >
-                #{tag}
-              </span>
-            ))}
-          </div>
-        </div> */}
-
         <p className="text-xl font-light my-4">Comments:</p>
-        <div className="flex animate-marquee gap-6 py-4 flex-nowrap">
+        <div className="flex animate-marquee gap-6 py-4 whitespace-nowrap ">
           {data.reviews.map((review, idx) => (
             <div
               key={idx}

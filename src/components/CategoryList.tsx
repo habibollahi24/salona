@@ -19,16 +19,16 @@ export default function CategoryList() {
       type="single"
       collapsible
       onValueChange={(val) => setOpen(val === 'item-1')}
-      className="sticky top-4"
+      className="sticky top-22"
     >
       <AccordionItem value="item-1">
-        <AccordionTrigger className="cursor-pointer border-1  px-4">
+        <AccordionTrigger className="cursor-pointer">
           Categories
         </AccordionTrigger>
         <AccordionContent>
           <div
-            className=" overflow-y-auto relative! h-[300px] border-l-   [&::-webkit-scrollbar]:[width:12px]
-            [&::-webkit-scrollbar-thumb]:bg-gray-200 [&::-webkit-scrollbar-thumb]:rounded-md"
+            className="p-4 pb-10 overflow-y-auto relative h-[300px] [&::-webkit-scrollbar]:[width:10px]
+            [&::-webkit-scrollbar-thumb]:bg-gray-200 [&::-webkit-scrollbar-thumb]:rounded-md [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] [mask-repeat:no-repeat] [mask-size:100%_100%][-webkit-mask-image:linear-gradient(to_bottom,black_90%,transparent_100%)]"
           >
             {isLoading && (
               <div className="flex flex-col gap-5">
@@ -41,40 +41,32 @@ export default function CategoryList() {
             )}
 
             {data && (
-              <div className=" w-full bg-transparent relative p-3">
-                {/* Grid Background */}
-
-                <div
-                  className="absolute inset-0 -z-10"
-                  style={{
-                    backgroundImage: `
-        linear-gradient(to right, #e5e7eb 1px, transparent 1px),
-        linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)
-      `,
-                    backgroundSize: '80px 50px',
-                  }}
-                />
-                <ul className="flex flex-col gap-4 ">
+              <ul className="flex flex-col gap-4 ">
+                <li
+                  className="text-base font-light capitalize cursor-pointer"
+                  onClick={() => setCategory('')}
+                >
+                  All
+                </li>
+                {data.map((cat) => (
                   <li
+                    key={cat}
                     className="text-base font-light capitalize cursor-pointer"
-                    onClick={() => setCategory('')}
+                    onClick={() => setCategory(cat)}
                   >
-                    All
+                    {cat}
                   </li>
-                  {data.map((cat) => (
-                    <li
-                      key={cat}
-                      className="text-base font-light capitalize cursor-pointer"
-                      onClick={() => setCategory(cat)}
-                    >
-                      {cat}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                ))}
+              </ul>
             )}
           </div>
         </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger className="cursor-pointer">
+          Other Filter
+        </AccordionTrigger>
+        <AccordionContent>Here other filter</AccordionContent>
       </AccordionItem>
     </Accordion>
   );

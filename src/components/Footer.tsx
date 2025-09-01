@@ -16,7 +16,7 @@ export default function Footer() {
             'radial-gradient(ellipse 70% 60% at 50% 100%, #000 60%, transparent 100%)',
         }}
       />
-      <div className="py-10 flex flex-col justify-center items-center text-lg font-light">
+      <div className="py-10 flex flex-col justify-center items-center text-lg font-light ">
         Built Through Errors , with every Try and Catch💛
       </div>
     </div>

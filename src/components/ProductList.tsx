@@ -13,7 +13,13 @@ import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { Drawer, DrawerContent } from '@/components/ui/drawer';
 
 import { useMediaQuery } from '@/hooks/useMediaQuery'; // ✅ شاد‌سی‌ان داره
-import { ChevronRightIcon, Star } from 'lucide-react';
+import {
+  BookmarkIcon,
+  ChevronRightIcon,
+  HeartIcon,
+  ShoppingCartIcon,
+  Star,
+} from 'lucide-react';
 import { useState } from 'react';
 import { ProductDetails } from './ProductDetails';
 
@@ -34,7 +40,13 @@ export default function ProductsList() {
     <div className="">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {data.products.map((p: Product) => (
-          <div key={p.id} className="w-full rounded-xl p-3 shadow-xs">
+          <div
+            key={p.id}
+            className="w-full rounded-xl p-3 shadow-xs relative"
+          >
+            <div className="absolute bg-secondary px-2 py-1 rounded-2xl">
+              {Math.round(p.discountPercentage)} % OFF
+            </div>
             <img
               src={p.thumbnail}
               alt={p.title}
@@ -59,6 +71,18 @@ export default function ProductsList() {
             <div className="flex items-center gap-1">
               <Button className="flex-1 font-light">
                 Add To Cart
+                <ShoppingCartIcon />
+              </Button>
+
+              <Button variant="ghost" size="icon" className="size-9 ">
+                <HeartIcon className="" />
+              </Button>
+              <Button
+                variant="secondary"
+                size="icon"
+                className="size-9"
+              >
+                <BookmarkIcon />
               </Button>
               <Button
                 variant="secondary"
@@ -68,6 +92,14 @@ export default function ProductsList() {
               >
                 <ChevronRightIcon />
               </Button>
+            </div>
+            <div className="bg-red-50 border-dashed border-red-300 border-1 text-center rounded-md my-2 py-1 text-xs">
+              {p.stock > 0 ? (
+                <p>{p.stock} In Stock</p>
+              ) : (
+                <p>Out of Stock</p>
+              )}
+              <p>{p.shippingInformation}</p>
             </div>
           </div>
         ))}
@@ -100,12 +132,12 @@ export default function ProductsList() {
         >
           <SheetContent
             side="right"
-            className="w-[500px] sm:w-[600px] right-5 top-5 bottom-5 rounded-2xl overflow-hidden"
+            className="pb-8 w-[500px] sm:w-[600px] right-5 top-5 bottom-5 rounded-2xl overflow-auto 
+            [&::-webkit-scrollbar]:[width:10px]
+            [&::-webkit-scrollbar-thumb]:bg-gray-200 [&::-webkit-scrollbar-thumb]:rounded-md "
           >
-            {/* <div className="absolute w-full h-[50px]  top-0"></div> */}
-            <div className="min-h-screen w-full bg-transparent relative text-gray-800">
-              {/* Zigzag Lightning - Light Pattern */}
-              <div
+            {/* <div className="min-h-screen w-full bg-transparent relative text-gray-800"> */}
+            {/* <div
                 className="absolute inset-0 -z-10 pointer-events-none"
                 style={{
                   backgroundImage: `
@@ -115,10 +147,10 @@ export default function ProductsList() {
         repeating-linear-gradient(150deg, transparent, transparent 35px, rgba(31, 41, 55, 0.04) 35px, rgba(31, 41, 55, 0.04) 36px)
       `,
                 }}
-              />
-              {/* Your Content/Components */}
-              {selectedId && <ProductDetails id={selectedId} />}
-            </div>
+              /> */}
+
+            {selectedId && <ProductDetails id={selectedId} />}
+            {/* </div> */}
           </SheetContent>
         </Sheet>
       ) : (

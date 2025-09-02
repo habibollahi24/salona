@@ -4,7 +4,6 @@ import { useTheme } from '@/context/ThemeProvider';
 import { MoonIcon, SunIcon } from 'lucide-react';
 
 export default function Header() {
-  const { theme, setTheme } = useTheme();
   return (
     <div className="sticky top-0  backdrop-blur-md z-50 border-1 w-full bg-transparent  ">
       <div
@@ -18,48 +17,60 @@ export default function Header() {
       `,
         }}
       />
-      <div className=" ">
-        <div className="max-w-[1300px] mx-auto py-6 px-2 flex items-center justify-between">
-          <h2 className="text-lg font-light">SalonaBox</h2>
-          <nav className="flex gap-x-2 md:gap-x-4 text-base font-light">
-            <NavLink
-              to="/"
-              end
-              className={({ isActive }) =>
-                isActive ? 'text-primary font-medium' : ''
-              }
-            >
-              Products
-            </NavLink>
-            <NavLink
-              to="/about"
-              end
-              className={({ isActive }) =>
-                isActive ? 'text-primary font-medium' : ''
-              }
-            >
-              About
-            </NavLink>
-          </nav>
-          <div className="flex items-center space-x-2 ">
-            <Switch
-              id="theme-mode"
-              checked={theme === 'dark'}
-              onCheckedChange={(checked) =>
-                setTheme(checked ? 'dark' : 'light')
-              }
-              className="cursor-pointer"
-            />
-            <label htmlFor="theme-mode">
-              {theme === 'dark' ? (
-                <MoonIcon className="stroke-1" />
-              ) : (
-                <SunIcon className="stroke-1" />
-              )}
-            </label>
-          </div>
-        </div>
+
+      <div className="max-w-[1300px] mx-auto py-6 px-2 flex items-center justify-between">
+        <h2 className="text-lg font-light">SalonaBox</h2>
+        <HeaderNav />
+        <ToggleTheme />
       </div>
     </div>
+  );
+}
+
+function ToggleTheme() {
+  const { theme, setTheme } = useTheme();
+  return (
+    <div className="flex items-center space-x-2 ">
+      <Switch
+        id="theme-mode"
+        checked={theme === 'dark'}
+        onCheckedChange={(checked) =>
+          setTheme(checked ? 'dark' : 'light')
+        }
+        className="cursor-pointer"
+      />
+      <label htmlFor="theme-mode">
+        {theme === 'dark' ? (
+          <MoonIcon className="stroke-1" />
+        ) : (
+          <SunIcon className="stroke-1" />
+        )}
+      </label>
+    </div>
+  );
+}
+
+function HeaderNav() {
+  return (
+    <nav className="flex gap-x-2 md:gap-x-4 text-base font-light">
+      <NavLink
+        to="/"
+        end
+        className={({ isActive }) =>
+          isActive ? 'text-primary font-medium' : ''
+        }
+      >
+        Products
+      </NavLink>
+      <NavLink
+        to="/about"
+        end
+        className={({ isActive }) =>
+          isActive ? 'text-primary font-medium' : ''
+        }
+      >
+        About
+      </NavLink>
+    </nav>
   );
 }

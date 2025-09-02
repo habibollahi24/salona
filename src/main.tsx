@@ -6,14 +6,15 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ThemeProvider } from './context/ThemeProvider.tsx';
+
 import './index.css';
 
 import HomePage from './pages/page.tsx';
 import AboutPage from './pages/about/page.tsx';
 import MainLayout from './pages/layout.tsx';
-import { ThemeProvider } from './context/ThemeProvider.tsx';
 
-// Create a client
+
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(

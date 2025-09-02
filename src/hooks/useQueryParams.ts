@@ -18,7 +18,7 @@ export function useQueryParams() {
     } else {
       searchParams.delete('category');
     }
-    searchParams.set('page', '1'); // وقتی دسته عوض شد برگرده به صفحه 1
+    searchParams.set('page', '1');
     setSearchParams(searchParams);
   };
 

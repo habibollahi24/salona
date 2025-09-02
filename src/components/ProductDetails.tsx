@@ -3,6 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { ProductGallery } from './ProductGallery';
 import { Button } from './ui/button';
 import { Star } from 'lucide-react';
+import type { Product } from '@/types/product.type';
 
 export function ProductDetails({ id }: { id: number }) {
   const { data, isLoading, isError } = useProduct(id);
@@ -42,9 +43,6 @@ export function ProductDetails({ id }: { id: number }) {
 
         <Button className="my-4 w-full">Add to Cart</Button>
 
-        {/* <Separator className="my-6" /> */}
-
-        {/* مشخصات فنی */}
         <div className="space-y-2 text-xs">
           <p>
             <strong>Weight:</strong> {data.weight} kg
@@ -68,29 +66,35 @@ export function ProductDetails({ id }: { id: number }) {
         </div>
 
         <p className="text-xl font-light mt-8">Comments:</p>
-        <div className="flex animate-marquee gap-6 py-4 whitespace-nowrap ">
-          {data.reviews.map((review, idx) => (
-            <div
-              key={idx}
-              className="w-56 flex-shrink-0 bg-secondary p-4 rounded-2xl "
-            >
-              <div>
-                <div className="text-base">{review.reviewerName}</div>
-                <p className="text-sm text-gray-500">
-                  {review.date.slice(0, 10)}
-                </p>
-              </div>
-              <div>
-                <p className="text-amber-500 mb-2 flex items-center gap-x-2">
-                  <Star className="fill-amber-400 stroke-amber-400" />
-                  <span> {review.rating}</span>
-                </p>
-                <p className="text-sm">{review.comment}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ProductReviews data={data} />
       </div>
+    </div>
+  );
+}
+
+function ProductReviews({ data }: { data: Product }) {
+  return (
+    <div className="flex animate-marquee gap-6 py-4 whitespace-nowrap ">
+      {data.reviews.map((review, idx) => (
+        <div
+          key={idx}
+          className="w-56 flex-shrink-0 bg-secondary p-4 rounded-2xl "
+        >
+          <div>
+            <div className="text-base">{review.reviewerName}</div>
+            <p className="text-sm text-gray-500">
+              {review.date.slice(0, 10)}
+            </p>
+          </div>
+          <div>
+            <p className="text-amber-500 mb-2 flex items-center gap-x-2">
+              <Star className="fill-amber-400 stroke-amber-400" />
+              <span> {review.rating}</span>
+            </p>
+            <p className="text-sm">{review.comment}</p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useQueryParams } from './useQueryParams';
 import type { ProductsResponse } from '@/types/product.type';
+import { BASE_URL } from '@/config';
 
 const LIMIT = 10;
 
@@ -13,10 +14,10 @@ async function fetchProducts({
 }): Promise<ProductsResponse> {
   const skip = (page - 1) * LIMIT;
 
-  let url = `https://dummyjson.com/products?limit=${LIMIT}&skip=${skip}`;
+  let url = `${BASE_URL}/products?limit=${LIMIT}&skip=${skip}`;
 
   if (category) {
-    url = `https://dummyjson.com/products/category/${category}?limit=${LIMIT}&skip=${skip}`;
+    url = `${BASE_URL}/products/category/${category}?limit=${LIMIT}&skip=${skip}`;
   }
 
   const res = await fetch(url);
@@ -31,6 +32,6 @@ export function useProducts() {
     queryKey: ['products', page, category],
     queryFn: () => fetchProducts({ page, category }),
     placeholderData: (prev) => prev,
-    // keepPreviousData: true,
+    
   });
 }

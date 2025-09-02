@@ -28,7 +28,9 @@ export function ProductDetails({ id }: { id: number }) {
         <p className="text-foreground/50 mb-4">{data.description}</p>
 
         <div className="flex items-center gap-4 mb-4">
-          <span className="text-4xl font-light">${data.price}</span>
+          <span className="text-4xl font-extrabold text-secondary">
+            ${data.price}
+          </span>
           <span className="text-green-600 text-sm">
             {data.discountPercentage}% OFF
           </span>
@@ -65,7 +67,7 @@ export function ProductDetails({ id }: { id: number }) {
           </p>
         </div>
 
-        <p className="text-xl font-light my-4">Comments:</p>
+        <p className="text-xl font-light mt-8">Comments:</p>
         <div className="flex animate-marquee gap-6 py-4 whitespace-nowrap ">
           {data.reviews.map((review, idx) => (
             <div

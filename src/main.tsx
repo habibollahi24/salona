@@ -11,6 +11,7 @@ import './index.css';
 import HomePage from './pages/page.tsx';
 import AboutPage from './pages/about/page.tsx';
 import MainLayout from './pages/layout.tsx';
+import { ThemeProvider } from './context/ThemeProvider.tsx';
 
 // Create a client
 const queryClient = new QueryClient();
@@ -19,12 +20,14 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Route>
-        </Routes>
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+            </Route>
+          </Routes>
+        </ThemeProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </BrowserRouter>

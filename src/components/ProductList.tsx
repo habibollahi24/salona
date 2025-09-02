@@ -11,14 +11,11 @@ import { getPageNumbers } from '@/lib/utils';
 import { Button } from './ui/button';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import {
-  // Drawer,
-  // DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
 } from '@/components/ui/drawer';
 
-// import { useMediaQuery } from '@/hooks/useMediaQuery'; // ✅ شاد‌سی‌ان داره
 import {
   BookmarkIcon,
   ChevronRightIcon,
@@ -28,15 +25,22 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { ProductDetails } from './ProductDetails';
+import { Skeleton } from './ui/skeleton';
 
 export default function ProductsList() {
   const { data, isLoading, isError } = useProducts();
   const { page, setPage } = useQueryParams();
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  // const isDesktop = useMediaQuery('(min-width: 768px)');
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-3  gap-4">
+        {Array.from({ length: 10 }).map((_, i) => (
+          <Skeleton key={i} className="h-[430px] w-full" />
+        ))}
+      </div>
+    );
   if (isError || !data) return <p>Error loading products</p>;
 
   const total = data.total;
@@ -99,7 +103,7 @@ export default function ProductsList() {
                 <ChevronRightIcon />
               </Button>
             </div>
-            <div className="bg-red-50 border-dashed border-red-300 border-1 text-center rounded-md my-2 py-1 text-xs">
+            <div className="bg-red-50 border-dashed border-red-300 border-1 text-center rounded-md my-2 py-1 text-xs text-primary">
               {p.stock > 0 ? (
                 <p>{p.stock} In Stock</p>
               ) : (

@@ -1,4 +1,5 @@
 import CategoryList from '@/components/CategoryList';
+import CategoryMobileDrawer from '@/components/CategoryMobileDrawer';
 import ProductsList from '@/components/ProductList';
 
 export default function HomePage() {
@@ -9,6 +10,7 @@ export default function HomePage() {
           <CategoryList />
         </div>
         <div className="col-span-12 md:col-span-10 ">
+          <CategoryMobileDrawer />
           <ProductsList />
         </div>
       </div>

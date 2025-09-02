@@ -8,9 +8,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useState } from 'react';
 import { useCategories } from '@/hooks/useCategories';
 import { useQueryParams } from '@/hooks/useQueryParams';
+import { useSearchParams } from 'react-router';
+import { cn } from '@/lib/utils';
 
 export default function CategoryList() {
   const { setCategory } = useQueryParams();
+  const [searchParams] = useSearchParams();
   const [open, setOpen] = useState(false);
   const { data, isLoading, isError } = useCategories(open);
 
@@ -51,7 +54,13 @@ export default function CategoryList() {
                 {data.map((cat) => (
                   <li
                     key={cat}
-                    className="text-base font-light capitalize cursor-pointer"
+                    className={cn(
+                      'text-base font-light capitalize cursor-pointer',
+                      {
+                        'text-primary font-medium':
+                          cat === searchParams.get('category'),
+                      }
+                    )}
                     onClick={() => setCategory(cat)}
                   >
                     {cat}
